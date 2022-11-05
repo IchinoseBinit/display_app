@@ -1,14 +1,14 @@
-# echo "Enter your commit message"
-# read message
+echo "Enter your commit message"
+read message
 
-echo "Building your app"
+# echo "Building your app"
 
-flutter build apk --split-per-abi
+# flutter build apk --split-per-abi
 
-mkdir -p ./gen/
+# mkdir -p ./gen/
 
-mv ./build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk ./gen/batuwa.apk
+# mv ./build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk ./gen/batuwa.apk
 
-# git add .
-# git commit -m "$message"
-# git push origin main
+git add .
+git commit -m "$message"
+git push origin main
