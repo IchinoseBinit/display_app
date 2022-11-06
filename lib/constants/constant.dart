@@ -1,20 +1,16 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
-const Color primaryColor = Color(0xff135396);
-const Color gradientDarkColor = Color(0xff000428);
-const Color gradientLightColor = Color(0xff004E92);
-const Color dividerColor = Color(0xffD9D9D9);
-const Color secondaryColor = Color(0xff505050);
+const Color baseColor = Colors.red;
 
 const double padding = 16.0;
 final double radius = 8.r;
 
-const String aboutUsUrl = "https://ssf.gov.np/pages/introduction";
+// const String aboutUsUrl = "";
 
-const String privacyPolicyUrl = "https://sites.google.com/view/ssfnepal/";
+// const String privacyPolicyUrl = "";
 
 const basePadding =
     EdgeInsets.symmetric(horizontal: padding, vertical: padding * 1.5);
@@ -37,8 +33,3 @@ const passwordKey = "password";
 
 // Notification key
 const isNotificationEnabledKey = "notification";
-const ssfTopicKey = "ssf-all";
-
-// Withdraw Draft
-const withdrawDraftKey = "withdraw";
-const withdrawModelKey = "withdrawModel";

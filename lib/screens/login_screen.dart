@@ -14,8 +14,7 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
   final formKey = GlobalKey<FormState>();
-  final ssidController = TextEditingController();
-  final phoneNumberController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
@@ -49,23 +48,11 @@ class LoginScreen extends StatelessWidget {
                       title: "Sign In",
                       description: "Please enter your details",
                     ),
-                    // GeneralTextField(
-                    //   labelText: localizations.ssfid,
-                    //   controller: ssidController,
-                    //   obscureText: false,
-                    //   textInputType: TextInputType.text,
-                    //   validate: (val) =>
-                    //       ValidationMixin(context).validateSSFID(val),
-                    //   textInputAction: TextInputAction.next,
-                    // ),
-                    // SizedBox(
-                    //   height: 20.h,
-                    // ),
                     GeneralTextField(
                       labelText: "Email",
-                      controller: phoneNumberController,
+                      controller: emailController,
                       obscureText: false,
-                      textInputType: TextInputType.phone,
+                      textInputType: TextInputType.emailAddress,
                       validate: (val) => ValidationMixin().validateEmail(val),
                       textInputAction: TextInputAction.next,
                     ),
