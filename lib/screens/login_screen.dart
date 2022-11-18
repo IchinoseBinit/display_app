@@ -4,9 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '/components/auth_template.dart';
 import '/components/password_field.dart';
-import '/utils/navigate.dart';
+import '/constants/storage_constants.dart';
+import '/constants/urls.dart';
+import '/utils/dio_client.dart';
+import '/utils/error_handler.dart';
+import '/utils/fetch_content.dart';
+import '/utils/preferences_helper.dart';
+import '/utils/request_type.dart';
 import '/utils/validation_mixin.dart';
 import '/widgets/body_template.dart';
+import '/widgets/custom_loading_indicator.dart';
 import '/widgets/general_elevated_button.dart';
 import '/widgets/general_text_field.dart';
 
@@ -14,7 +21,7 @@ class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
   final formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
+  final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
@@ -49,11 +56,12 @@ class LoginScreen extends StatelessWidget {
                       description: "Please enter your details",
                     ),
                     GeneralTextField(
-                      labelText: "Email",
-                      controller: emailController,
+                      labelText: "Username",
+                      controller: usernameController,
                       obscureText: false,
                       textInputType: TextInputType.emailAddress,
-                      validate: (val) => ValidationMixin().validateEmail(val),
+                      validate: (val) =>
+                          ValidationMixin().validate(val, title: "Username"),
                       textInputAction: TextInputAction.next,
                     ),
                     SizedBox(
@@ -83,7 +91,28 @@ class LoginScreen extends StatelessWidget {
                     GeneralElevatedButton(
                       title: "Sign In",
                       onPressed: () async {
-                        if (formKey.currentState!.validate()) {}
+                        if (formKey.currentState!.validate()) {
+                          try {
+                            onLoading(context);
+                            final resp = await DioClient().request(
+                              requestType: RequestType.post,
+                              url: ApiEndpoints.loginUrl,
+                              body: {
+                                "username": usernameController.text,
+                                "password": passwordController.text,
+                              },
+                            );
+                            Navigator.pop(context);
+                            DioClient.token = resp.data["token"];
+                            PreferencesHelper.write(
+                              key: StorageConstants.tokenKey,
+                              value: resp.data["token"],
+                            );
+                            await FetchContent().fetchAllContent(context);
+                          } catch (ex) {
+                            ErrorHandler().errorHandler(context, ex);
+                          }
+                        }
                       },
                     ),
                     SizedBox(

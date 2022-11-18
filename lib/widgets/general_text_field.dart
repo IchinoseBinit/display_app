@@ -1,4 +1,4 @@
-import 'package:display_app/constants/constant.dart';
+import '/constants/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

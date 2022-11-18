@@ -18,8 +18,6 @@ class ValidationMixin {
       {bool isConfirmPassword = false, String confirmValue = ""}) {
     if (value.trim().isEmpty) {
       return "Password is required";
-    } else if (value.trim().length < 5) {
-      return "Password must be at least 6 characters";
     }
     if (isConfirmPassword) {
       if (value != confirmValue) {
