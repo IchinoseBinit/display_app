@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '/api/branch_api.dart';
 import '/api/images_api.dart';
 import '/api/news_api.dart';
@@ -12,15 +14,22 @@ class FetchContent {
   fetchAllContent(BuildContext context) async {
     final newsList = await NewsApi().fetch();
     final notice = await NoticeApi().fetch();
-    final branches = await BranchesApi().fetch();
+    final branch = await BranchesApi().fetch();
     final images = await ImagesApi().fetch();
     final videos = await VideosApi().fetch();
     final staffList = await StaffApi().fetch();
+    log("message");
+    print(newsList);
+    print(notice);
+    print(branch);
+    print(images);
+    print(videos);
+    print(staffList);
 
     navigateReplacement(
       context,
       DisplayScreen(
-        branches: branches,
+        branch: branch,
         images: images,
         news: newsList,
         notice: notice,

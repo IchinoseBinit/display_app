@@ -1,11 +1,16 @@
+import 'package:display_app/screens/splash_screen.dart';
+import 'package:display_app/utils/preferences_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '/constants/constant.dart';
 import 'screens/login_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  PreferencesHelper.prefs = await SharedPreferences.getInstance();
   runApp(const MyApp());
 }
 
@@ -49,7 +54,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: LoginScreen(),
+          home: const SplashScreen(),
         );
       },
     );

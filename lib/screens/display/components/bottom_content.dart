@@ -1,3 +1,5 @@
+import 'package:display_app/models/news.dart';
+
 import '/constants/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -5,9 +7,11 @@ class BottomContent extends StatelessWidget {
   const BottomContent({
     super.key,
     required this.height,
+    required this.notice,
   });
 
   final double height;
+  final News? notice;
 
   @override
   Widget build(BuildContext context) {
@@ -21,24 +25,29 @@ class BottomContent extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
+            height: height,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             color: Colors.black,
-            child: const Text(
-              "सूचना",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
+            child: const Center(
+              child: Text(
+                "सूचना",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                ),
               ),
             ),
           ),
           Expanded(
               child: Container(
             color: baseColor,
-            child: const Text(
-              "No Message",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
+            child: Center(
+              child: Text(
+                notice?.name ?? "No Message",
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                ),
               ),
             ),
           ))

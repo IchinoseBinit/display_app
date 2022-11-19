@@ -1,3 +1,6 @@
+import 'package:display_app/models/branch.dart';
+import 'package:nepali_utils/nepali_utils.dart';
+
 import '/constants/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -5,30 +8,158 @@ class TopHeader extends StatelessWidget {
   const TopHeader({
     super.key,
     required this.height,
+    required this.branch,
   });
 
+  final double height;
+  final Branch branch;
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width - 32;
+    return Container(
+      height: height,
+      width: width + 32,
+      color: baseColor,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TopLeftWidget(width: width),
+            TopCenterWidget(width: width, branch: branch, height: height),
+            TopRightWidget(width: width)
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class TopCenterWidget extends StatelessWidget {
+  const TopCenterWidget({
+    Key? key,
+    required this.width,
+    required this.branch,
+    required this.height,
+  }) : super(key: key);
+
+  final double width;
+  final Branch branch;
   final double height;
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    return Container(
-      height: height,
-      width: width,
-      color: baseColor,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    var phone = "";
+    for (var e in branch.phone) {
+      phone += "$e";
+      if (branch.phone.last != e) {
+        phone = "$phone/";
+      }
+    }
+    return SizedBox(
+      width: width * .5,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            width: width * .25,
+          Text(
+            branch.name,
+            style: const TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           SizedBox(
-            width: width * .5,
+            height: height * 0.02,
           ),
-          SizedBox(
-            width: width * .25,
-          )
+          Text(
+            branch.address,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.white,
+            ),
+          ),
+          Text(
+            phone,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TopRightWidget extends StatelessWidget {
+  const TopRightWidget({
+    Key? key,
+    required this.width,
+  }) : super(key: key);
+
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width * .25,
+      // TODO: Add data from API
+      alignment: Alignment.centerRight,
+      child: const Text(
+        "27\u2103",
+        style: TextStyle(
+          fontSize: 18,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+}
+
+class TopLeftWidget extends StatelessWidget {
+  const TopLeftWidget({
+    Key? key,
+    required this.width,
+  }) : super(key: key);
+
+  final double width;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: width * .25,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "${NepaliDateFormat(
+              "yyyy-MM-dd",
+              Language.nepali,
+            ).format(
+              DateTime.now().toNepaliDateTime(),
+            )} गते",
+            style: const TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+            ),
+          ),
+          Text(
+            NepaliDateFormat(
+              "EEE,a,hh:mm",
+              Language.nepali,
+            ).format(
+              DateTime.now().toNepaliDateTime(),
+            ),
+            style: const TextStyle(
+              fontSize: 18,
+              color: Colors.white,
+            ),
+          ),
         ],
       ),
     );

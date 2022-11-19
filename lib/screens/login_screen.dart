@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,11 +29,10 @@ class LoginScreen extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    // if (kDebugMode) {
-    //   phoneNumberController.text = "9804350997";
-    //   passwordController.text = "Admin@123";
-    // }
-
+    if (kDebugMode) {
+      usernameController.text = "admin@mail.com";
+      passwordController.text = "MnbvcxZ@#1";
+    }
     return WillPopScope(
       onWillPop: () async {
         // return navigateAndRemoveAll(context, WelcomeScreen());

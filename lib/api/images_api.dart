@@ -4,11 +4,16 @@ import '/utils/dio_client.dart';
 import '/utils/request_type.dart';
 
 class ImagesApi {
-  fetch() async {
-    final resp = await DioClient().request(
-      requestType: RequestType.getWithToken,
-      url: ApiEndpoints.imagesUrl,
-    );
-    return Images.fromMap(resp.data);
+  Future<Images> fetch() async {
+    try {
+      final resp = await DioClient().request(
+        requestType: RequestType.getWithToken,
+        url: ApiEndpoints.imagesUrl,
+      );
+      return Images.fromMap(resp.data);
+    } catch (ex) {
+      print(ex.toString());
+      rethrow;
+    }
   }
 }

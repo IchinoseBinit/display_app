@@ -5,15 +5,16 @@ import '/utils/dio_client.dart';
 import '/utils/request_type.dart';
 
 class BranchesApi {
-  fetch() async {
-    final resp = await DioClient().request(
-      requestType: RequestType.getWithToken,
-      url: ApiEndpoints.branchUrl,
-    );
-    final list = [];
-    for (var branch in resp.data) {
-      list.add(Branch.fromJson(branch));
+  Future<Branch> fetch() async {
+    try {
+      final resp = await DioClient().request(
+        requestType: RequestType.getWithToken,
+        url: ApiEndpoints.branchUrl,
+      );
+      return Branch.fromJson(resp.data);
+    } catch (ex) {
+      print(ex.toString());
+      rethrow;
     }
-    return list;
   }
 }

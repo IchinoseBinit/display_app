@@ -5,11 +5,15 @@ import '/utils/dio_client.dart';
 import '/utils/request_type.dart';
 
 class NoticeApi {
-  fetch() async {
-    final resp = await DioClient().request(
-      requestType: RequestType.getWithToken,
-      url: ApiEndpoints.noticeUrl,
-    );
-    return News.fromJson(resp.data);
+  Future<News?> fetch() async {
+    try {
+      final resp = await DioClient().request(
+        requestType: RequestType.getWithToken,
+        url: ApiEndpoints.noticeUrl,
+      );
+      return News.fromJson(resp.data);
+    } catch (ex) {
+      print(ex.toString());
+    }
   }
 }

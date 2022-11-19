@@ -2,7 +2,7 @@ class Branch {
   late final String name;
   late final String address;
   late final String geoMap;
-  late final List<String> phone;
+  late final List<dynamic> phone;
 
   Branch.fromJson(Map obj) {
     name = obj["name"];
