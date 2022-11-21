@@ -14,22 +14,15 @@ class ErrorHandler {
     BuildContext context,
     Object ex,
   ) {
+    print(ex);
     final isFormatException = ex.runtimeType.toString() == "_TypeError";
 
     if (isFormatException) {
       Navigator.pop(context);
       showToast(ex.toString(), color: baseColor);
     } else {
-      var message = "";
-      // socket exception
-      if (ex is DioError && ex.error.runtimeType == SocketException) {
-        message = ErrorHandler.errorMessage;
-      } else {
-        message = ex.toString();
-      }
-
       Navigator.pop(context);
-      showToast(message, color: baseColor);
+      showToast(ex.toString(), color: baseColor);
     }
   }
 }
