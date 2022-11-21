@@ -20,6 +20,7 @@ class DisplayScreen extends StatelessWidget {
     required this.images,
     required this.staff,
     this.notice,
+    required this.temp,
   });
 
   final Branch branch;
@@ -28,6 +29,7 @@ class DisplayScreen extends StatelessWidget {
   final Images images;
   final List<Staff> staff;
   final News? notice;
+  final int temp;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +47,7 @@ class DisplayScreen extends StatelessWidget {
               TopHeader(
                 height: height * .23,
                 branch: branch,
+                temp: temp,
               ),
               SizedBox(
                 height: height * 0.015,

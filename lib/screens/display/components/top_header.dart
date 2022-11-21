@@ -8,10 +8,12 @@ class TopHeader extends StatelessWidget {
   const TopHeader({
     super.key,
     required this.height,
+    required this.temp,
     required this.branch,
   });
 
   final double height;
+  final int temp;
   final Branch branch;
 
   @override
@@ -29,7 +31,7 @@ class TopHeader extends StatelessWidget {
           children: [
             TopLeftWidget(width: width),
             TopCenterWidget(width: width, branch: branch, height: height),
-            TopRightWidget(width: width)
+            TopRightWidget(width: width, temp: temp)
           ],
         ),
       ),
@@ -98,19 +100,20 @@ class TopRightWidget extends StatelessWidget {
   const TopRightWidget({
     Key? key,
     required this.width,
+    required this.temp,
   }) : super(key: key);
 
   final double width;
+  final int temp;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: width * .25,
-      // TODO: Add data from API
       alignment: Alignment.centerRight,
-      child: const Text(
-        "27\u2103",
-        style: TextStyle(
+      child: Text(
+        "$temp\u2103",
+        style: const TextStyle(
           fontSize: 18,
           color: Colors.white,
           fontWeight: FontWeight.bold,

@@ -2,34 +2,65 @@ import 'package:display_app/models/video.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class VideoContent extends StatelessWidget {
+class VideoContent extends StatefulWidget {
   const VideoContent({super.key, required this.video});
 
   final Video video;
 
   @override
-  Widget build(BuildContext context) {
-    final videoId = YoutubePlayer.convertUrlToId(video.link) ?? "";
-    YoutubePlayerController controller = YoutubePlayerController(
-      initialVideoId: videoId,
+  State<VideoContent> createState() => _VideoContentState();
+}
+
+class _VideoContentState extends State<VideoContent> {
+  late YoutubePlayerController _controller;
+  late TextEditingController _idController;
+  late TextEditingController _seekToController;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = YoutubePlayerController(
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.video.link) ?? "",
       flags: const YoutubePlayerFlags(
+        mute: false,
         autoPlay: true,
-        mute: true,
+        disableDragSeek: false,
+        loop: false,
+        isLive: false,
+        forceHD: false,
+        enableCaption: true,
       ),
     );
+    _idController = TextEditingController();
+    _seekToController = TextEditingController();
+  }
+
+  @override
+  void deactivate() {
+    _controller.pause();
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _idController.dispose();
+    _seekToController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 4),
       child: YoutubePlayer(
-        controller: controller,
+        controller: _controller,
         showVideoProgressIndicator: true,
         progressIndicatorColor: Colors.amber,
         progressColors: const ProgressBarColors(
           playedColor: Colors.amber,
           handleColor: Colors.amberAccent,
         ),
-        // onReady: () {
-        //   _controller.addListener(listener);
-        // },
       ),
     );
   }

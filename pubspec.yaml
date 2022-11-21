@@ -43,6 +43,8 @@ dependencies:
   nepali_utils: ^3.0.3
   youtube_player_flutter: ^8.1.1
   carousel_slider: ^4.1.1
+  permission_handler: ^10.2.0
+  geolocator: ^9.0.2
 
 dev_dependencies:
   flutter_test:

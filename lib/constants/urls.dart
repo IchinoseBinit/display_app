@@ -1,3 +1,5 @@
+import 'package:display_app/constants/constant.dart';
+
 class ApiEndpoints {
   static const _baseUrl = "https://office.kushtech.com.np";
   static const loginUrl = "$_baseUrl/api-login/";
@@ -10,4 +12,7 @@ class ApiEndpoints {
   static const noticeUrl = "$_apiUrl/notice/";
   static const staffUrl = "$_apiUrl/staff/";
   static const videosUrl = "$_apiUrl/videos/";
+
+  static const weatherUrl =
+      "https://api.openweathermap.org/data/2.5/weather?lat=latitude&lon=longitude&appid=${UserConstants.apiKey}&units=metric";
 }

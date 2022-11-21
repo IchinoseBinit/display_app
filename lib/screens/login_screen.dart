@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '/components/auth_template.dart';
 import '/components/password_field.dart';
@@ -19,7 +20,9 @@ import '/widgets/general_elevated_button.dart';
 import '/widgets/general_text_field.dart';
 
 class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key, this.position}) : super(key: key);
+
+  final Position? position;
 
   final formKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
@@ -30,8 +33,8 @@ class LoginScreen extends StatelessWidget {
     BuildContext context,
   ) {
     if (kDebugMode) {
-      usernameController.text = "admin@mail.com";
-      passwordController.text = "MnbvcxZ@#1";
+      usernameController.text = "manager@mail.com";
+      passwordController.text = "amrit@123";
     }
     return WillPopScope(
       onWillPop: () async {
@@ -102,13 +105,13 @@ class LoginScreen extends StatelessWidget {
                                 "password": passwordController.text,
                               },
                             );
-                            Navigator.pop(context);
                             DioClient.token = resp.data["token"];
                             PreferencesHelper.write(
                               key: StorageConstants.tokenKey,
                               value: resp.data["token"],
                             );
-                            await FetchContent().fetchAllContent(context);
+                            await FetchContent()
+                                .fetchAllContent(context, position);
                           } catch (ex) {
                             ErrorHandler().errorHandler(context, ex);
                           }
