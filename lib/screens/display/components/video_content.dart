@@ -23,12 +23,13 @@ class _VideoContentState extends State<VideoContent> {
       initialVideoId: YoutubePlayer.convertUrlToId(widget.video.link) ?? "",
       flags: const YoutubePlayerFlags(
         mute: false,
-        autoPlay: true,
+        autoPlay: false,
         disableDragSeek: false,
         loop: false,
         isLive: false,
         forceHD: false,
         enableCaption: true,
+        showLiveFullscreenButton: false,
       ),
     );
     _idController = TextEditingController();

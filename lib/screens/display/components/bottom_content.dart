@@ -27,7 +27,7 @@ class BottomContent extends StatelessWidget {
           Container(
             height: height,
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            color: Colors.black,
+            color: baseColor,
             child: const Center(
               child: Text(
                 "सूचना",
@@ -40,7 +40,7 @@ class BottomContent extends StatelessWidget {
           ),
           Expanded(
               child: Container(
-            color: baseColor,
+            color: Colors.black,
             child: Center(
               child: Text(
                 notice?.name ?? "No Message",

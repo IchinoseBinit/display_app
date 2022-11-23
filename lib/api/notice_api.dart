@@ -11,7 +11,7 @@ class NoticeApi {
         requestType: RequestType.getWithToken,
         url: ApiEndpoints.noticeUrl,
       );
-      return News.fromJson(resp.data);
+      return News.fromJson(resp.data[0]);
     } catch (ex) {
       print(ex.toString());
     }
