@@ -19,16 +19,16 @@ class DisplayScreen extends StatelessWidget {
     required this.news,
     required this.images,
     required this.staff,
-    this.notice,
+    required this.notice,
     required this.temp,
   });
 
   final Branch branch;
   final List<Video> videos;
-  final List<News> news;
+  final List<News> notice;
   final Images images;
   final List<Staff> staff;
-  final News? notice;
+  final List<News> news;
   final int temp;
 
   @override
@@ -56,7 +56,7 @@ class DisplayScreen extends StatelessWidget {
                 height:
                     height - ((height * .23) + (height * .03) + (height * .08)),
                 videos: videos,
-                news: news,
+                notice: notice,
                 staff: staff,
                 images: images,
               ),
@@ -65,7 +65,7 @@ class DisplayScreen extends StatelessWidget {
               ),
               BottomContent(
                 height: height * .08,
-                notice: notice,
+                news: news,
               ),
             ],
           );

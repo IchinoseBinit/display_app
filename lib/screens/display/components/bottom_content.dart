@@ -1,4 +1,5 @@
 import 'package:display_app/models/news.dart';
+import 'package:marquee/marquee.dart';
 
 import '/constants/constant.dart';
 import 'package:flutter/material.dart';
@@ -7,15 +8,18 @@ class BottomContent extends StatelessWidget {
   const BottomContent({
     super.key,
     required this.height,
-    required this.notice,
+    required this.news,
   });
 
   final double height;
-  final News? notice;
+  final List<News> news;
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final message =
+        news.map((e) => "${e.name}:- ${e.description}").toList().join("\t");
+
     return Container(
       height: height,
       width: width,
@@ -41,13 +45,28 @@ class BottomContent extends StatelessWidget {
           Expanded(
               child: Container(
             color: Colors.black,
+            alignment: Alignment.center,
             child: Center(
-              child: Text(
-                notice?.name ?? "No Message",
+              child: Marquee(
+                text: message,
                 style: const TextStyle(
+                  fontWeight: FontWeight.bold,
                   color: Colors.white,
-                  fontSize: 14,
                 ),
+
+                scrollAxis: Axis.horizontal,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                blankSpace: 20.0,
+                velocity: 100.0,
+                pauseAfterRound: const Duration(seconds: 1),
+                showFadingOnlyWhenScrolling: true,
+                fadingEdgeStartFraction: 0.1,
+                fadingEdgeEndFraction: 0.1,
+                // startPadding: 10.0,
+                accelerationDuration: const Duration(seconds: 3),
+                accelerationCurve: Curves.linear,
+                decelerationDuration: const Duration(milliseconds: 500),
+                decelerationCurve: Curves.easeOut,
               ),
             ),
           ))

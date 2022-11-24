@@ -14,13 +14,13 @@ class BodyContent extends StatelessWidget {
       {super.key,
       required this.height,
       required this.videos,
-      required this.news,
+      required this.notice,
       required this.images,
       required this.staff});
 
   final double height;
   final List<Video> videos;
-  final List<News> news;
+  final List<News> notice;
   final Images images;
   final List<Staff> staff;
 
@@ -66,7 +66,7 @@ class BodyContent extends StatelessWidget {
                 SizedBox(
                   height: height * .5,
                   child: NewsContainer(
-                    news: news,
+                    news: notice,
                     height: height * .5,
                   ),
                 )

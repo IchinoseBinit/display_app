@@ -5,15 +5,20 @@ import '/utils/dio_client.dart';
 import '/utils/request_type.dart';
 
 class NoticeApi {
-  Future<News?> fetch() async {
+  Future<List<News>> fetch() async {
     try {
       final resp = await DioClient().request(
         requestType: RequestType.getWithToken,
         url: ApiEndpoints.noticeUrl,
       );
-      return News.fromJson(resp.data[0]);
+      final list = <News>[];
+      for (var news in resp.data) {
+        list.add(News.fromJson(news));
+      }
+      return list;
     } catch (ex) {
       print(ex.toString());
+      return <News>[];
     }
   }
 }

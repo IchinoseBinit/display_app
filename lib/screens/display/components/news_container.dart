@@ -18,6 +18,7 @@ class NewsContainer extends StatelessWidget {
           left: 4,
         ),
         height: height - 4,
+        width: double.infinity,
         decoration: BoxDecoration(
           border: Border.all(
             color: Colors.black,
@@ -25,6 +26,7 @@ class NewsContainer extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(8),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: news
               .map(
                 (e) => Text(
