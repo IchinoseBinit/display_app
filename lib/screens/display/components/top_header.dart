@@ -1,4 +1,5 @@
 import 'package:display_app/models/branch.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nepali_utils/nepali_utils.dart';
 
 import '/constants/constant.dart';
@@ -65,19 +66,34 @@ class TopCenterWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            branch.name,
-            style: const TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.memory(
+                branch.image,
+                height: 22.h,
+                width: 22.h,
+              ),
+              SizedBox(
+                width: 3.w,
+              ),
+              const Text(
+                "Kush Tech",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
           SizedBox(
             height: height * 0.02,
           ),
           Text(
-            branch.address,
+            "${branch.name}, ${branch.address}",
             style: const TextStyle(
               fontSize: 16,
               color: Colors.white,

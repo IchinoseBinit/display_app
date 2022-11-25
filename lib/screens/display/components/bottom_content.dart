@@ -46,28 +46,27 @@ class BottomContent extends StatelessWidget {
               child: Container(
             color: Colors.black,
             alignment: Alignment.center,
-            child: Center(
-              child: Marquee(
-                text: message,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-
-                scrollAxis: Axis.horizontal,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                blankSpace: 20.0,
-                velocity: 100.0,
-                pauseAfterRound: const Duration(seconds: 1),
-                showFadingOnlyWhenScrolling: true,
-                fadingEdgeStartFraction: 0.1,
-                fadingEdgeEndFraction: 0.1,
-                // startPadding: 10.0,
-                accelerationDuration: const Duration(seconds: 3),
-                accelerationCurve: Curves.linear,
-                decelerationDuration: const Duration(milliseconds: 500),
-                decelerationCurve: Curves.easeOut,
+            padding: EdgeInsets.only(top: height * .2),
+            child: Marquee(
+              text: message,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
+
+              scrollAxis: Axis.horizontal,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              blankSpace: 20.0,
+              velocity: 100.0,
+              pauseAfterRound: const Duration(seconds: 1),
+              showFadingOnlyWhenScrolling: true,
+              fadingEdgeStartFraction: 0.1,
+              fadingEdgeEndFraction: 0.1,
+              // startPadding: 10.0,
+              accelerationDuration: const Duration(seconds: 3),
+              accelerationCurve: Curves.linear,
+              decelerationDuration: const Duration(milliseconds: 500),
+              decelerationCurve: Curves.easeOut,
             ),
           ))
         ],

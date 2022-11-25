@@ -41,12 +41,12 @@ class SplashScreen extends StatelessWidget {
       checkToken(context, value);
     }).onError((error, stackTrace) => checkToken(context, null));
 
-    return const Scaffold(
-      backgroundColor: baseColor,
-      body: Center(
-          child: Icon(
-        Icons.abc_outlined,
-      )),
+    return const SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: CircularProgressIndicator.adaptive(),
+        ),
+      ),
     );
   }
 
