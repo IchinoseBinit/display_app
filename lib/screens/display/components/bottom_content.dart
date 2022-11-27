@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:display_app/models/news.dart';
 import 'package:marquee/marquee.dart';
 
@@ -17,9 +19,11 @@ class BottomContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final message =
-        news.map((e) => "${e.name}:- ${e.description}").toList().join("\t");
-
+    final message = news
+        .map((e) => "${e.name}:- ${e.description}")
+        .toList()
+        .join("\t\t\t\t");
+    log(message, name: "message");
     return Container(
       height: height,
       width: width,
@@ -57,7 +61,7 @@ class BottomContent extends StatelessWidget {
               scrollAxis: Axis.horizontal,
               crossAxisAlignment: CrossAxisAlignment.start,
               blankSpace: 20.0,
-              velocity: 100.0,
+              velocity: 80.0,
               pauseAfterRound: const Duration(seconds: 1),
               showFadingOnlyWhenScrolling: true,
               fadingEdgeStartFraction: 0.1,

@@ -55,22 +55,41 @@ class SplashScreen extends StatelessWidget {
     LocationPermission permission;
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
+      final val = await askPermission();
+      if (val != null) {
+        return val;
+      }
     }
 
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
+        final val = await askPermission();
+        if (val != null) {
+          return val;
+        }
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+      final val = await askPermission();
+      if (val != null) {
+        return val;
+      }
     }
 
     return await Geolocator.getCurrentPosition();
+  }
+
+  askPermission() async {
+    await openAppSettings();
+    final permission = await Geolocator.requestPermission();
+    final hasPermission = permission == LocationPermission.always ||
+        permission == LocationPermission.whileInUse;
+    if (!hasPermission) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
   }
 }

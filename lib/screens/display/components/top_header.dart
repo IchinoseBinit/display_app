@@ -63,22 +63,19 @@ class TopCenterWidget extends StatelessWidget {
     }
     return SizedBox(
       width: width * .5,
-      child: Column(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
+          Image.memory(
+            branch.image,
+            height: height - 30,
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
             children: [
-              Image.memory(
-                branch.image,
-                height: 22.h,
-                width: 22.h,
-              ),
-              SizedBox(
-                width: 3.w,
-              ),
               const Text(
                 "Kush Tech",
                 style: TextStyle(
@@ -87,24 +84,24 @@ class TopCenterWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              SizedBox(
+                height: height * 0.02,
+              ),
+              Text(
+                "${branch.name}, ${branch.address}",
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                phone,
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                ),
+              ),
             ],
-          ),
-          SizedBox(
-            height: height * 0.02,
-          ),
-          Text(
-            "${branch.name}, ${branch.address}",
-            style: const TextStyle(
-              fontSize: 16,
-              color: Colors.white,
-            ),
-          ),
-          Text(
-            phone,
-            style: const TextStyle(
-              fontSize: 16,
-              color: Colors.white,
-            ),
           ),
         ],
       ),

@@ -44,11 +44,9 @@ class BodyContent extends StatelessWidget {
                     width: width,
                   ),
                 ),
-                SizedBox(
+                StaffContainer(
+                  staffs: staff,
                   height: height * .35,
-                  child: StaffContainer(
-                    staffs: staff,
-                  ),
                 ),
               ],
             ),
