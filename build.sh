@@ -3,11 +3,11 @@ read message
 
 echo "Building your app"
 
-flutter build apk --release 
+flutter build apk --release --split-per-abi
 
 mkdir -p ./gen/
 
-mv ./build/app/outputs/flutter-apk/* ./gen/
+mv ./build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk ./gen/display.apk
 
 git add .
 git commit -m "$message"
