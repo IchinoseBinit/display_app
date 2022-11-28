@@ -7,7 +7,7 @@ flutter build apk --release --split-per-abi
 
 mkdir -p ./gen/
 
-mv ./build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk ./gen/batuwa.apk
+mv ./build/app/outputs/flutter-apk/* ./gen/
 
 git add .
 git commit -m "$message"
