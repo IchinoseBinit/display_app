@@ -15,59 +15,36 @@ class NewsContainer extends StatefulWidget {
 class _NewsContainerState extends State<NewsContainer> {
   late ScrollController controller;
 
-  bool scrollForward = true;
-
   @override
   void initState() {
     super.initState();
     controller = ScrollController()
       ..addListener(() {
-        if (scrollForward) {
-          controller
-              .animateTo(controller.offset + 200,
-                  duration: const Duration(milliseconds: 800),
-                  curve: Curves.easeInOut)
-              .then((_) {
-            if (controller.offset > controller.position.maxScrollExtent - 5) {
-              Future.delayed(
-                const Duration(seconds: 2),
-                () {
-                  setState(() => scrollForward = false);
-                  controller.animateTo(controller.offset - 200,
-                      duration: const Duration(milliseconds: 800),
-                      curve: Curves.easeInOut);
-                },
-              );
-            }
-          });
-        } else {
-          controller
-              .animateTo(controller.offset - 200,
-                  duration: const Duration(milliseconds: 800),
-                  curve: Curves.easeInOut)
-              .then((_) {
-            if (controller.offset < controller.position.minScrollExtent + 5) {
-              Future.delayed(
-                const Duration(seconds: 2),
-                () {
-                  setState(() => scrollForward = true);
-                  controller.animateTo(controller.offset + 200,
-                      duration: const Duration(milliseconds: 800),
-                      curve: Curves.easeInOut);
-                },
-              );
-            } else {
-              controller.animateTo(controller.offset - 200,
-                  duration: const Duration(milliseconds: 800),
-                  curve: Curves.easeInOut);
-            }
-          });
-        }
+        controller
+            .animateTo(controller.offset + 200,
+                duration: const Duration(milliseconds: 800),
+                curve: Curves.easeInOut)
+            .then((_) {
+          if (controller.offset > controller.position.maxScrollExtent - 5) {
+            Future.delayed(
+              const Duration(seconds: 2),
+              () {
+                controller.jumpTo(
+                  controller.position.minScrollExtent,
+                );
+                controller.animateTo(controller.offset + 200,
+                    duration: const Duration(milliseconds: 800),
+                    curve: Curves.easeInOut);
+              },
+            );
+          }
+        });
       });
     Future.delayed(
-        Duration(seconds: 2),
+        const Duration(seconds: 2),
         () => controller.animateTo(controller.initialScrollOffset + 200,
-            duration: Duration(milliseconds: 800), curve: Curves.easeInOut));
+            duration: const Duration(milliseconds: 800),
+            curve: Curves.easeInOut));
   }
 
   @override
@@ -110,11 +87,20 @@ class _NewsContainerState extends State<NewsContainer> {
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           fontSize: 16,
+                          fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
                       ),
                     ),
-                    Text(e.description)
+                    Text(
+                      e.description,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
                   ],
                 ),
               )

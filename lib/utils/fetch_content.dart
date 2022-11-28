@@ -29,12 +29,6 @@ class FetchContent {
       temp = (await WeatherDataApi()
               .fetchWeatherInfo(position.latitude, position.longitude))
           .toInt();
-    print(newsList);
-    print(notice);
-    print(branch);
-    print(images);
-    print(videos);
-    print(staffList);
 
     navigateReplacement(
       context,

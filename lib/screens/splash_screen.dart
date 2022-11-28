@@ -12,9 +12,14 @@ import '/utils/fetch_content.dart';
 import '/utils/navigate.dart';
 import '/utils/preferences_helper.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
   checkToken(BuildContext context, Position? position) {
     final val = PreferencesHelper.readKey(key: StorageConstants.tokenKey);
     log(val.toString(), name: "token");
@@ -36,11 +41,16 @@ class SplashScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
     getLocation().then((value) {
       checkToken(context, value);
     }).onError((error, stackTrace) => checkToken(context, null));
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return const SafeArea(
       child: Scaffold(
         body: Center(
