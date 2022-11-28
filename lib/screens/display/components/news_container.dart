@@ -1,14 +1,80 @@
 import 'package:display_app/constants/constant.dart';
 import 'package:display_app/models/news.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-class NewsContainer extends StatelessWidget {
+class NewsContainer extends StatefulWidget {
   const NewsContainer({super.key, required this.news, required this.height});
 
   final List<News> news;
   final double height;
+
+  @override
+  State<NewsContainer> createState() => _NewsContainerState();
+}
+
+class _NewsContainerState extends State<NewsContainer> {
+  late ScrollController controller;
+
+  bool scrollForward = true;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = ScrollController()
+      ..addListener(() {
+        if (scrollForward) {
+          controller
+              .animateTo(controller.offset + 200,
+                  duration: const Duration(milliseconds: 800),
+                  curve: Curves.easeInOut)
+              .then((_) {
+            if (controller.offset > controller.position.maxScrollExtent - 5) {
+              Future.delayed(
+                const Duration(seconds: 2),
+                () {
+                  setState(() => scrollForward = false);
+                  controller.animateTo(controller.offset - 200,
+                      duration: const Duration(milliseconds: 800),
+                      curve: Curves.easeInOut);
+                },
+              );
+            }
+          });
+        } else {
+          controller
+              .animateTo(controller.offset - 200,
+                  duration: const Duration(milliseconds: 800),
+                  curve: Curves.easeInOut)
+              .then((_) {
+            if (controller.offset < controller.position.minScrollExtent + 5) {
+              Future.delayed(
+                const Duration(seconds: 2),
+                () {
+                  setState(() => scrollForward = true);
+                  controller.animateTo(controller.offset + 200,
+                      duration: const Duration(milliseconds: 800),
+                      curve: Curves.easeInOut);
+                },
+              );
+            } else {
+              controller.animateTo(controller.offset - 200,
+                  duration: const Duration(milliseconds: 800),
+                  curve: Curves.easeInOut);
+            }
+          });
+        }
+      });
+    Future.delayed(
+        Duration(seconds: 2),
+        () => controller.animateTo(controller.initialScrollOffset + 200,
+            duration: Duration(milliseconds: 800), curve: Curves.easeInOut));
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +83,7 @@ class NewsContainer extends StatelessWidget {
         top: 4,
         left: 4,
       ),
-      height: height - 4,
+      height: widget.height - 4,
       width: double.infinity,
       decoration: BoxDecoration(
         border: Border.all(
@@ -26,9 +92,10 @@ class NewsContainer extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(8),
       child: SingleChildScrollView(
+        controller: controller,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: news
+          children: widget.news
               .map(
                 (e) => Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
