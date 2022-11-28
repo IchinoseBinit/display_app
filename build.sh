@@ -3,7 +3,7 @@ read message
 
 echo "Building your app"
 
-flutter build apk --release --split-per-abi
+flutter build apk --release 
 
 mkdir -p ./gen/
 
