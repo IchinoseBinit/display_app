@@ -70,9 +70,9 @@ class StaffContainer extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text(staffs[index].designation),
-                      Text(staffs[index].phone.first),
-                      Text(
+                      getTextDetail(staffs[index].designation),
+                      getTextDetail(staffs[index].phone.first),
+                      getTextDetail(
                         "कोठा नं : ${staffs[index].roomNo}",
                       )
                     ],
@@ -86,10 +86,10 @@ class StaffContainer extends StatelessWidget {
     );
   }
 
-  Widget getTextDetail(double width, String text) {
-    return SizedBox(
-      width: width,
-      child: Text(text),
+  Widget getTextDetail(String text) {
+    return Text(
+      text,
+      style: const TextStyle(fontSize: 11),
     );
   }
 }

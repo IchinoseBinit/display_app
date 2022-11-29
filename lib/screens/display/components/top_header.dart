@@ -76,9 +76,9 @@ class TopCenterWidget extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "Kush Tech",
-                style: TextStyle(
+              Text(
+                branch.officeName,
+                style: const TextStyle(
                   fontSize: 20,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
