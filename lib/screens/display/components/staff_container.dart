@@ -2,70 +2,94 @@ import 'package:display_app/models/staff.dart';
 import 'package:flutter/material.dart';
 
 class StaffContainer extends StatelessWidget {
-  const StaffContainer({super.key, required this.staffs, required this.height});
+  const StaffContainer(
+      {super.key,
+      required this.staffs,
+      required this.height,
+      required this.width});
 
   final List<Staff> staffs;
   final double height;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
+    var finalWidth = (width / 2) - 8;
     return Container(
-      height: height - 4,
+      height: height - 8,
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.black,
         ),
       ),
-      width: double.infinity,
-      margin: const EdgeInsets.only(top: 4),
-      child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.start,
-        alignment: WrapAlignment.start,
-        runAlignment: WrapAlignment.center,
-        children: staffs
-            .map(
-              (e) => Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey,
+      width: width,
+      margin: const EdgeInsets.symmetric(
+        vertical: 4,
+      ),
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        padding: EdgeInsets.zero,
+        itemCount: staffs.length > 2 ? 2 : staffs.length,
+        primary: false,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (context, index) => Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.grey,
+            ),
+          ),
+          width: finalWidth,
+          height: height - 16,
+          margin: const EdgeInsets.symmetric(horizontal: 3.5, vertical: 4),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 4,
+            vertical: 4,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.memory(
+                staffs[index].image!,
+                width: finalWidth * 0.3,
+                height: height - 26,
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              SizedBox(
+                width: finalWidth * 0.7 - 15,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        staffs[index].name,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(staffs[index].designation),
+                      Text(staffs[index].phone.first),
+                      Text(
+                        "कोठा नं : ${staffs[index].roomNo}",
+                      )
+                    ],
                   ),
                 ),
-                height: height - 16,
-                margin: const EdgeInsets.all(4),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 4,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Image.memory(
-                      e.image!,
-                      // width: MediaQuery.of(context).size.width / 2 * 0.2,
-                      height: height - 26,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          e.name,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(e.designation),
-                        Text(e.phone.first),
-                        Text("कोठा नं : ${e.roomNo}")
-                      ],
-                    ),
-                  ],
-                ),
               ),
-            )
-            .toList(),
+            ],
+          ),
+        ),
       ),
+    );
+  }
+
+  Widget getTextDetail(double width, String text) {
+    return SizedBox(
+      width: width,
+      child: Text(text),
     );
   }
 }

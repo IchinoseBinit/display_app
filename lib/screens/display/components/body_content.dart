@@ -47,6 +47,7 @@ class BodyContent extends StatelessWidget {
                 StaffContainer(
                   staffs: staff,
                   height: height * .35,
+                  width: width * .5,
                 ),
               ],
             ),
