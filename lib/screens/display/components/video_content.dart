@@ -23,7 +23,7 @@ class _VideoContentState extends State<VideoContent> {
       initialVideoId: YoutubePlayer.convertUrlToId(widget.video.link) ?? "",
       flags: const YoutubePlayerFlags(
         mute: false,
-        autoPlay: false,
+        autoPlay: true,
         disableDragSeek: false,
         loop: false,
         isLive: false,
