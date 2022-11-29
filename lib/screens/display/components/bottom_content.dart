@@ -19,11 +19,14 @@ class BottomContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final message = news
-        .map((e) => "${e.name}:- ${e.description}")
-        .toList()
-        .join("\t\t\t\t");
-    log(message, name: "message");
+    String? message;
+    if (news.isNotEmpty) {
+      message = news
+          .map((e) => "${e.name}:- ${e.description}")
+          .toList()
+          .join("\t\t\t\t");
+    }
+    log(message ?? "", name: "message");
     return Container(
       height: height,
       width: width,
@@ -47,32 +50,42 @@ class BottomContent extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: Container(
-            color: Colors.black,
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(top: height * .2),
-            child: Marquee(
-              text: message,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+            child: Container(
+              color: Colors.black,
+              alignment: Alignment.center,
+              padding:
+                  message != null ? EdgeInsets.only(top: height * .2) : null,
+              child: message != null
+                  ? Marquee(
+                      text: message,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
 
-              scrollAxis: Axis.horizontal,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              blankSpace: 20.0,
-              velocity: 80.0,
-              pauseAfterRound: const Duration(seconds: 1),
-              showFadingOnlyWhenScrolling: true,
-              fadingEdgeStartFraction: 0.1,
-              fadingEdgeEndFraction: 0.1,
-              // startPadding: 10.0,
-              accelerationDuration: const Duration(seconds: 3),
-              accelerationCurve: Curves.linear,
-              decelerationDuration: const Duration(milliseconds: 500),
-              decelerationCurve: Curves.easeOut,
+                      scrollAxis: Axis.horizontal,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      blankSpace: 20.0,
+                      velocity: 80.0,
+                      pauseAfterRound: const Duration(seconds: 1),
+                      showFadingOnlyWhenScrolling: true,
+                      fadingEdgeStartFraction: 0.1,
+                      fadingEdgeEndFraction: 0.1,
+                      // startPadding: 10.0,
+                      accelerationDuration: const Duration(seconds: 3),
+                      accelerationCurve: Curves.linear,
+                      decelerationDuration: const Duration(milliseconds: 500),
+                      decelerationCurve: Curves.easeOut,
+                    )
+                  : const Text(
+                      "No Message!!!",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
             ),
-          ))
+          )
         ],
       ),
     );
