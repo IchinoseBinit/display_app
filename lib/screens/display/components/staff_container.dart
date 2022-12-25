@@ -14,17 +14,17 @@ class StaffContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var finalWidth = (width / 2) - 8;
+    var finalWidth = width - 8;
     return Container(
-      height: height - 8,
+      height: height - 4,
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.black,
         ),
       ),
       width: width,
-      margin: const EdgeInsets.symmetric(
-        vertical: 4,
+      margin: const EdgeInsets.only(
+        top: 4,
       ),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -32,7 +32,7 @@ class StaffContainer extends StatelessWidget {
         padding: EdgeInsets.zero,
         itemCount: staffs.length > 2 ? 2 : staffs.length,
         primary: false,
-        physics: const NeverScrollableScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) => Container(
           decoration: BoxDecoration(
             border: Border.all(

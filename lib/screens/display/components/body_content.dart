@@ -2,6 +2,7 @@ import 'package:display_app/models/images.dart';
 import 'package:display_app/models/news.dart';
 import 'package:display_app/models/staff.dart';
 import 'package:display_app/models/video.dart';
+import 'package:display_app/screens/display/components/image_video_container.dart';
 import 'package:display_app/screens/display/components/news_container.dart';
 import 'package:display_app/screens/display/components/staff_container.dart';
 
@@ -39,9 +40,10 @@ class BodyContent extends StatelessWidget {
               children: [
                 SizedBox(
                   height: height * .65,
-                  child: CarouselPhoto(
+                  child: ImageVideoContainer(
                     images: images,
                     width: width,
+                    videos: videos,
                   ),
                 ),
                 StaffContainer(
@@ -54,23 +56,24 @@ class BodyContent extends StatelessWidget {
           ),
           SizedBox(
             width: width * .5,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: height * .5,
-                  child: VideoContent(
-                    video: videos.last,
-                  ),
-                ),
-                SizedBox(
-                  height: height * .5,
-                  child: NewsContainer(
-                    news: notice,
-                    height: height * .5,
-                  ),
-                )
-              ],
+            child: NewsContainer(
+              news: notice,
+              height: height,
             ),
+            //     Column(
+            // children: [
+            //   // SizedBox(
+            //   //   height: height * .5,
+            //   //   child: VideoContent(
+            //   //     video: videos.last,
+            //   //   ),
+            //   // ),
+            //   SizedBox(
+            //     height: height,
+            //     child:
+            //   )
+            // ],
+            // ),
           )
         ],
       ),

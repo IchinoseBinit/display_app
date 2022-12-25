@@ -45,7 +45,7 @@ class DisplayScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TopHeader(
-                height: height * .23,
+                height: height * .18,
                 branch: branch,
                 temp: temp,
               ),
@@ -54,7 +54,7 @@ class DisplayScreen extends StatelessWidget {
               ),
               BodyContent(
                 height:
-                    height - ((height * .23) + (height * .03) + (height * .08)),
+                    height - ((height * .18) + (height * .03) + (height * .08)),
                 videos: videos,
                 notice: notice,
                 staff: staff,

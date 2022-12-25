@@ -4,10 +4,15 @@ import 'package:display_app/models/images.dart';
 import 'package:flutter/material.dart';
 
 class CarouselPhoto extends StatefulWidget {
-  const CarouselPhoto({super.key, required this.images, required this.width});
+  const CarouselPhoto(
+      {super.key,
+      required this.images,
+      required this.width,
+      required this.function});
 
   final Images images;
   final double width;
+  final VoidCallback function;
 
   @override
   State<CarouselPhoto> createState() => _CarouselPhotoState();
@@ -36,6 +41,9 @@ class _CarouselPhotoState extends State<CarouselPhoto> {
               initialPage: 0,
               onPageChanged: (index, _) => setState(
                 () {
+                  if (index == 0) {
+                    widget.function();
+                  }
                   this.index = index;
                 },
               ),

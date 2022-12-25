@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoContent extends StatefulWidget {
-  const VideoContent({super.key, required this.video});
+  const VideoContent({super.key, required this.video, required this.callback});
 
   final Video video;
+  final VoidCallback callback;
 
   @override
   State<VideoContent> createState() => _VideoContentState();
@@ -58,6 +59,9 @@ class _VideoContentState extends State<VideoContent> {
         controller: _controller,
         showVideoProgressIndicator: true,
         progressIndicatorColor: Colors.amber,
+        onEnded: (_) {
+          widget.callback();
+        },
         progressColors: const ProgressBarColors(
           playedColor: Colors.amber,
           handleColor: Colors.amberAccent,

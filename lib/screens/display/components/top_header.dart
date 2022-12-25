@@ -79,25 +79,25 @@ class TopCenterWidget extends StatelessWidget {
               Text(
                 branch.officeName,
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 18,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(
-                height: height * 0.02,
+                height: height * 0.01,
               ),
               Text(
                 "${branch.name}, ${branch.address}",
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   color: Colors.white,
                 ),
               ),
               Text(
                 phone,
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   color: Colors.white,
                 ),
               ),
@@ -127,7 +127,7 @@ class TopRightWidget extends StatelessWidget {
       child: Text(
         "$temp\u2103",
         style: const TextStyle(
-          fontSize: 18,
+          fontSize: 16,
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
@@ -146,7 +146,8 @@ class TopLeftWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top / 2),
       width: width * .25,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,7 +161,7 @@ class TopLeftWidget extends StatelessWidget {
               DateTime.now().toNepaliDateTime(),
             )} गते",
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 18,
               color: Colors.white,
             ),
           ),
@@ -172,7 +173,7 @@ class TopLeftWidget extends StatelessWidget {
               DateTime.now().toNepaliDateTime(),
             ),
             style: const TextStyle(
-              fontSize: 18,
+              fontSize: 16,
               color: Colors.white,
             ),
           ),

@@ -57,10 +57,9 @@ class _NewsContainerState extends State<NewsContainer> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        top: 4,
         left: 4,
       ),
-      height: widget.height - 4,
+      height: widget.height,
       width: double.infinity,
       decoration: BoxDecoration(
         border: Border.all(
