@@ -1,3 +1,4 @@
+import 'package:display_app/api/connectivity_api.dart';
 import 'package:display_app/screens/splash_screen.dart';
 import 'package:display_app/utils/preferences_helper.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import '/constants/constant.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   PreferencesHelper.prefs = await SharedPreferences.getInstance();
+  ConnectivityApi().monitorConnection();
   runApp(const MyApp());
 }
 

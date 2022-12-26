@@ -35,7 +35,7 @@ class BodyContent extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(
-            width: width * .5,
+            width: width * .33,
             child: Column(
               children: [
                 SizedBox(
@@ -49,13 +49,13 @@ class BodyContent extends StatelessWidget {
                 StaffContainer(
                   staffs: staff,
                   height: height * .35,
-                  width: width * .5,
+                  width: width * .33,
                 ),
               ],
             ),
           ),
           SizedBox(
-            width: width * .5,
+            width: width * .67,
             child: NewsContainer(
               news: notice,
               height: height,

@@ -41,7 +41,7 @@
         <receiver
         android:enabled="true"
         android:exported="true"
-        android:name="com.example.display_app"
+        android:name=".BootBroadcastReceiver"
         android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
         <intent-filter>
             <action android:name="android.intent.action.BOOT_COMPLETED" />

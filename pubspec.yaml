@@ -46,6 +46,8 @@ dependencies:
   permission_handler: ^10.2.0
   geolocator: ^9.0.2
   marquee: ^2.2.3
+  connectivity_plus: ^3.0.2
+  auto_start_flutter: ^0.1.1
 
 dev_dependencies:
   flutter_test:

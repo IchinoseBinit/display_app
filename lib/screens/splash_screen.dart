@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:auto_start_flutter/auto_start_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -47,6 +49,25 @@ class _SplashScreenState extends State<SplashScreen> {
     getLocation().then((value) {
       checkToken(context, value);
     }).onError((error, stackTrace) => checkToken(context, null));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initAutoStart();
+  }
+
+  Future<void> initAutoStart() async {
+    try {
+      //check auto-start availability.
+      var test = await isAutoStartAvailable;
+
+      //if available then navigate to auto-start setting page.
+      if (test ?? false) await getAutoStartPermission();
+    } on PlatformException catch (e) {
+      print(e);
+    }
+    if (!mounted) return;
   }
 
   @override

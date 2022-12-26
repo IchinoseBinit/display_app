@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:display_app/constants/constant.dart';
 import 'package:display_app/models/images.dart';
+import 'package:display_app/widgets/build_dots.dart';
 import 'package:flutter/material.dart';
 
 class CarouselPhoto extends StatefulWidget {
@@ -70,34 +71,13 @@ class _CarouselPhotoState extends State<CarouselPhoto> {
               ),
               color: Colors.grey.withOpacity(0.15),
             ),
-            child: buildDots(index),
+            child: BuildDots(
+              index: index,
+              list: widget.images.images,
+            ),
           ),
         ),
       ],
-    );
-  }
-
-  Widget buildDots(int index) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: widget.images.images
-          .map(
-            (e) => Container(
-              margin: const EdgeInsets.symmetric(horizontal: 4),
-              height: 4,
-              width: 4,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  4,
-                ),
-                color: widget.images.images.indexOf(e) == index
-                    ? baseColor
-                    : Colors.grey,
-              ),
-            ),
-          )
-          .toList(),
     );
   }
 }
