@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:display_app/models/custom_exception.dart';
 import 'package:display_app/utils/error_handler.dart';
 import 'package:flutter/foundation.dart';
 
@@ -144,6 +145,12 @@ class DioClient {
           ex.response?.data["non_field_errors"] is List) {
         throw ex.response?.data?["non_field_errors"][0] ??
             ErrorHandler.errorMessage;
+      } else if (ex.response?.statusCode == 401 &&
+          ex.response!.data!["detail"]
+              .toString()
+              .toLowerCase()
+              .contains("token")) {
+        throw LogoutException();
       }
       throw ex.response?.data?["message"] ?? ErrorHandler.errorMessage;
     } catch (ex) {

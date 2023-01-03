@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '/models/branch.dart';
 import '/models/images.dart';
 import '/models/news.dart';
+import '/models/notice.dart';
 import '/models/staff.dart';
 import '/models/video.dart';
 import '/screens/display/components/body_content.dart';
@@ -25,7 +25,7 @@ class DisplayScreen extends StatelessWidget {
 
   final Branch branch;
   final List<Video> videos;
-  final List<News> notice;
+  final List<Notice> notice;
   final Images images;
   final List<Staff> staff;
   final List<News> news;

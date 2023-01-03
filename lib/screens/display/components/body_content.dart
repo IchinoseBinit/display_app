@@ -1,13 +1,10 @@
 import 'package:display_app/models/images.dart';
-import 'package:display_app/models/news.dart';
+import 'package:display_app/models/notice.dart';
 import 'package:display_app/models/staff.dart';
 import 'package:display_app/models/video.dart';
 import 'package:display_app/screens/display/components/image_video_container.dart';
 import 'package:display_app/screens/display/components/news_container.dart';
 import 'package:display_app/screens/display/components/staff_container.dart';
-
-import '/screens/display/components/carousel_photo.dart';
-import '/screens/display/components/video_content.dart';
 import 'package:flutter/cupertino.dart';
 
 class BodyContent extends StatelessWidget {
@@ -21,7 +18,7 @@ class BodyContent extends StatelessWidget {
 
   final double height;
   final List<Video> videos;
-  final List<News> notice;
+  final List<Notice> notice;
   final Images images;
   final List<Staff> staff;
 

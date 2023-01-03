@@ -1,11 +1,11 @@
 import 'package:display_app/constants/constant.dart';
-import 'package:display_app/models/news.dart';
+import 'package:display_app/models/notice.dart';
 import 'package:flutter/material.dart';
 
 class NewsContainer extends StatefulWidget {
   const NewsContainer({super.key, required this.news, required this.height});
 
-  final List<News> news;
+  final List<Notice> news;
   final double height;
 
   @override
@@ -91,12 +91,35 @@ class _NewsContainerState extends State<NewsContainer> {
                         ),
                       ),
                     ),
-                    Text(
-                      e.description,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    ...e.contents
+                        .map(
+                          (e) => Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                e.subtitle,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline,
+                                  // color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                e.description,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                        .toList(),
                     const SizedBox(
                       height: 16,
                     ),

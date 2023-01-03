@@ -33,8 +33,8 @@ class LoginScreen extends StatelessWidget {
     BuildContext context,
   ) {
     if (kDebugMode) {
-      usernameController.text = "manager@mail.com";
-      passwordController.text = "amrit@123";
+      usernameController.text = "branch@mail.com";
+      passwordController.text = "branch123";
     }
     return WillPopScope(
       onWillPop: () async {

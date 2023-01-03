@@ -3,3 +3,9 @@ class CustomException implements Exception {
 
   CustomException(this.message);
 }
+
+class LogoutException implements Exception {
+  late final String? message;
+
+  LogoutException([this.message]);
+}
