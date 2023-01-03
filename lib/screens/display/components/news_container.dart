@@ -116,12 +116,15 @@ class _NewsContainerState extends State<NewsContainer> {
                                   fontSize: 12,
                                 ),
                               ),
+                              const SizedBox(
+                                height: 12,
+                              ),
                             ],
                           ),
                         )
                         .toList(),
                     const SizedBox(
-                      height: 16,
+                      height: 8,
                     ),
                   ],
                 ),
