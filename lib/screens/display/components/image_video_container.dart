@@ -20,25 +20,37 @@ class ImageVideoContainer extends StatefulWidget {
 }
 
 class _ImageVideoContainerState extends State<ImageVideoContainer> {
-  bool showImage = true;
+  late bool showImage;
 
   toggleImageVideoView() {
-    setState(() {
-      showImage = !showImage;
-    });
+    if (widget.videos.isNotEmpty && widget.images.images.isNotEmpty) {
+      setState(() {
+        showImage = !showImage;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    showImage = widget.images.images.isNotEmpty;
   }
 
   @override
   Widget build(BuildContext context) {
-    return showImage
-        ? CarouselPhoto(
-            images: widget.images,
-            width: widget.width,
-            function: toggleImageVideoView,
+    return widget.images.images.isEmpty && widget.videos.isEmpty
+        ? const Center(
+            child: Text("No images or videos to show"),
           )
-        : VideoContent(
-            video: widget.videos.last,
-            callback: toggleImageVideoView,
-          );
+        : showImage
+            ? CarouselPhoto(
+                images: widget.images,
+                width: widget.width,
+                function: toggleImageVideoView,
+              )
+            : VideoContent(
+                video: widget.videos.last,
+                callback: toggleImageVideoView,
+              );
   }
 }

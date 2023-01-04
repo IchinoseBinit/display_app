@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import '/models/staff.dart';
 
 import '/constants/urls.dart';
@@ -12,8 +14,8 @@ class StaffApi {
         url: ApiEndpoints.staffUrl,
       );
       final list = <Staff>[];
-      for (var news in resp.data) {
-        list.add(Staff.fromJson(news));
+      for (var staff in resp.data) {
+        list.add(Staff.fromJson(staff));
       }
       return list;
     } catch (ex) {
